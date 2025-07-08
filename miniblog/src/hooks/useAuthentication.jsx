@@ -17,7 +17,7 @@ export const useAuthetication = () =>{
 
     const auth = getAuth()
 
-    function checkIfIsCancelled(){
+    const checkIfIsCancelled = () => {
         if(cancelled){
             return;
         }
