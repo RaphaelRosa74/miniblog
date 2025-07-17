@@ -5,7 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 //hooks
 import { useState, useEffect } from 'react';
-import { useAuthetication } from './hooks/useAuthentication';
+import { useAuthentication } from './hooks/useAuthentication';
 
 //context
 import { AuthProvider } from './context/AuthContext';
@@ -25,7 +25,7 @@ import Footer from './components/Footer';
 function App() {
 
   const [user, setUser] = useState(undefined)
-  const{auth} = useAuthetication()
+  const{auth} = useAuthentication()
 
   const loadingUser = user === undefined
 
@@ -50,10 +50,12 @@ function App() {
         <Routes>
           <Route path='/' element={ < Home /> }/>
           <Route path='/about' element={ <About /> }/>
-          <Route path='/login' element={ < Login /> }/>
-          <Route path='/register' element={ <Register /> }/>
-          <Route path='/post/create' element={ <CreatePost/> }/>
-          <Route path='/dashboard' element={ <Dashboard/> }/>
+          <Route path='/login' element={ !user ? <Login/> : <Navigate to="/"/>}/>
+          <Route path='/register' element={ !user ? <Register/> : <Navigate to="/"/> }/>
+          <Route path='/post/create' 
+          element={user ? <CreatePost/> : <Navigate to="/login"/> }/>
+          <Route path='/dashboard' 
+          element={user ? <Dashboard/> : <Navigate to="/login"/> }/>
 
         </Routes>
       </div>
