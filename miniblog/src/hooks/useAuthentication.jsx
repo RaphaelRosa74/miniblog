@@ -1,4 +1,5 @@
-import { db } from "../firebase/config";
+import { app, db } from "../firebase/config";
+import { auth } from "../firebase/config";
 
 import {
   getAuth,
@@ -74,20 +75,28 @@ export const useAuthentication = () => {
     checkIfIsCancelled();
 
     setLoading(true);
-    setError(false);
+    setError(null);
 
     try {
+       console.log("Dados enviados para login:", data);
+
       await signInWithEmailAndPassword(auth, data.email, data.password);
       setLoading(false);
     } catch (error) {
+      console.log("Código do erro:", error.code);
+      console.log("Mensagem do erro:", error.message);
       let systemErrorMessage;
 
-      if (error.message.includes("user-not-found")) {
-        systemErrorMessage = "Usuário não encontrado!";
-      } else if (error.message.includes("wrong-password")) {
-        systemErrorMessage = "Senha incorreta";
-      } else {
-        systemErrorMessage = "Ocorreu algum erro, por favor tente novamente!";
+      switch (error.code) {
+        case "auth/user-not-found":
+          systemErrorMessage = "Usuário não encontrado!";
+          break;
+        case "auth/wrong-password":
+          systemErrorMessage = "Senha incorreta";
+          break;
+        default:
+          systemErrorMessage = "Ocorreu algum erro, por favor tente novamente!";
+          break;
       }
 
       setError(systemErrorMessage);
