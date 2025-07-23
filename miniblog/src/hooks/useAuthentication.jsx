@@ -86,12 +86,12 @@ export const useAuthentication = () => {
       console.log("Código do erro:", error.code);
       console.log("Mensagem do erro:", error.message);
       let systemErrorMessage;
-
+      //não está funcionando como eu quero
       switch (error.code) {
-        case "auth/user-not-found":
+        case "auth/user-not-found": //não enconstrado
           systemErrorMessage = "Usuário não encontrado!";
           break;
-        case "auth/wrong-password":
+        case "auth/wrong-password": //não encontrado
           systemErrorMessage = "Senha incorreta";
           break;
         default:
