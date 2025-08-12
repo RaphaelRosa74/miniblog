@@ -1,6 +1,4 @@
-import { app, db } from "../firebase/config";
-import { auth } from "../firebase/config";
-
+import { useState, useEffect } from "react";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -8,8 +6,8 @@ import {
   updateProfile,
   signOut,
 } from "firebase/auth";
-
-import { useState, useEffect } from "react";
+import { app, db } from "../firebase/config";
+import { auth } from "../firebase/config";
 
 export const useAuthentication = () => {
   const [error, setError] = useState(null);
@@ -73,26 +71,16 @@ export const useAuthentication = () => {
   // login
   const login = async (data) => {
     checkIfIsCancelled();
-
     setLoading(true);
     setError(null);
 
     try {
-       console.log("Dados enviados para login:", data);
-
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      setLoading(false);
     } catch (error) {
-      console.log("Código do erro:", error.code);
-      console.log("Mensagem do erro:", error.message);
       let systemErrorMessage;
-      //não está funcionando como eu quero
       switch (error.code) {
-        case "auth/user-not-found": //não enconstrado
-          systemErrorMessage = "Usuário não encontrado!";
-          break;
-        case "auth/wrong-password": //não encontrado
-          systemErrorMessage = "Senha incorreta";
+        case "auth/invalid-credential":
+          systemErrorMessage = "E-mail ou senha incorretos";
           break;
         default:
           systemErrorMessage = "Ocorreu algum erro, por favor tente novamente!";
@@ -100,6 +88,7 @@ export const useAuthentication = () => {
       }
 
       setError(systemErrorMessage);
+    } finally {
       setLoading(false);
     }
   };

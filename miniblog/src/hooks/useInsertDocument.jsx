@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
-import { db } from "../firebase/config";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { db } from "../firebase/config";
 //collection: para trabalhar com as "tabelas" ou seja collection do firebase
 //addDoc: irá fazer o insert do documento no banco
 //Timestamp: irá marcar o horario que o dado foi criado
@@ -23,13 +23,13 @@ const insertReducer = (state, action) => {
   }
 };
 
-export const userInsertDocument = (docColletion) => {
+export const useInsertDocument = (docCollection) => {
   //docColletion: programador quando ira inserir algo no sistema ele informar qual a coleções.
 
   const [response, dispatch] = useReducer(insertReducer, initialState);
 
   //deal with memory leak
-  const [cancelled, setcancelled] = useState(false);
+  const [cancelled, setCancelled] = useState(false);
 
   const checkCancelledBeforeDispatch = (action) => {
     if (!cancelled) {
@@ -45,7 +45,7 @@ export const userInsertDocument = (docColletion) => {
       const newDocument = { ...document, createdAt: Timestamp.now() };
 
       const InsertedDocument = await addDoc(
-        collection(db, docColletion),
+        collection(db, docCollection),
         newDocument
       );
 
@@ -61,7 +61,7 @@ export const userInsertDocument = (docColletion) => {
     }
   };
   useEffect(() => {
-    return () => setcancelled(true);
+    return () => setCancelled(true);
   }, []);
 
   return { insertDocument, response };
