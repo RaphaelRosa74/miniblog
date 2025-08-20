@@ -45,7 +45,7 @@ export const useFetchDocuments = (
             else{
               q = query(collectionRef, orderBy("createdAt", "desc"));
             }
-            
+
             //dashboard
             onSnapshot(q, (querySnapshot) => {
                 setDocuments(
@@ -58,7 +58,6 @@ export const useFetchDocuments = (
 
             setLoading(false)
         } catch (error) {
-            console.log(error)
             setError(error.message)
             setLoading(false)
         }

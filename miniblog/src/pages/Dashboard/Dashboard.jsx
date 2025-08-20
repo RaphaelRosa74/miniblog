@@ -5,15 +5,22 @@ import { Link } from "react-router-dom";
 //hooks
 import { useAuthValue } from "../../context/AuthContext";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
+import { useDeleteDocuments } from "../../hooks/useDeleteDocuments";
 
 const Dashboard = () => {
   const { user } = useAuthValue();
   const uid = user.uid;
 
-  const { document: posts, loading } = useFetchDocuments("posts", null, uid);
+  const { documents: posts, loading } = useFetchDocuments("posts", null, uid);
+
+  const { deleteDocument } = useDeleteDocuments("posts");
+
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
 
   return (
-    <div>
+    <div className={styles.dashboard}>
       <h1>Dashboard</h1>
       <p>Gerencie suas postagens!</p>
       {posts && posts.length === 0 ? (
@@ -24,12 +31,36 @@ const Dashboard = () => {
           </Link>
         </div>
       ) : (
-        <div>
-          <p>Tem posts!</p>
-        </div>
+        <>
+          <div className={styles.post_header}>
+            <span>Tem posts!</span>
+            <span>Ações</span>
+          </div>
+          {posts &&
+            posts.map((post) => (
+              <div key={post.id} className={styles.post_row}>
+                <p>{post.title}</p>
+                <div>
+                  <Link to={`/post/${post.id}`} className="btn btn-outline">
+                    Ver
+                  </Link>
+                  <Link
+                    to={`/post/edit/${post.id}`}
+                    className="btn btn-outline"
+                  >
+                    Editar
+                  </Link>
+                  <button
+                    onClick={() => deleteDocument(post.id)}
+                    className="btn btn-outline btn-danger"
+                  >
+                    Excluir
+                  </button>
+                </div>
+              </div>
+            ))}
+        </>
       )}
-      {posts && posts.map((post) => <h3>{post.title}</h3>)}
-      {/*não esta funcionando essa parte de mostrar os posts*/ }
     </div>
   );
 };
