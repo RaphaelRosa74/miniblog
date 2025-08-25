@@ -13,13 +13,11 @@ export const useFetchDocument = (docCollection, id) => {
   useEffect(() => {
     async function loadDocument() {
       if (cancelled) return;
-      
       setLoading(true);
       
       try {
         const docRef = doc(db, docCollection, id);
         const docSnap = await getDoc(docRef);
-
         setDocument(docSnap.data());
         setLoading(false);
       } catch (error) {
