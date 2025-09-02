@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+📖 MiniBlog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Um mini blog desenvolvido em React.js com integração ao Firebase, onde usuários podem se cadastrar, autenticar, criar, visualizar, editar e deletar postagens. O projeto foi feito com foco em aprender e aplicar conceitos modernos do React, como hooks customizados, Context API, e boas práticas de organização de componentes.
 
-## Available Scripts
+🚀 Tecnologias Utilizadas
 
-In the project directory, you can run:
+React.js (create-react-app)
 
-### `npm start`
+React Router DOM para navegação
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Context API para gerenciamento de autenticação
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Firebase Authentication (login/cadastro de usuários)
 
-### `npm test`
+Firebase Firestore (armazenamento das postagens)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+CSS Modules para estilização isolada
 
-### `npm run build`
+Hooks customizados para CRUD e autenticação
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+⚙️ Funcionalidades
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Cadastro e login de usuários
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Autenticação persistente
 
-### `npm run eject`
+Criação de novas postagens
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Edição de postagens existentes
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Exclusão de postagens
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Listagem de posts no feed
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Detalhes individuais de cada post
 
-## Learn More
+Pesquisa de posts por palavra-chave
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+📂 Estrutura do Projeto
+miniblog/
+ ├── public/             # Arquivos públicos (index.html, favicon, etc.)
+ ├── src/
+ │   ├── components/     # Componentes reutilizáveis (Navbar, Footer, etc.)
+ │   ├── context/        # Context API (AuthContext)
+ │   ├── firebase/       # Configuração do Firebase
+ │   ├── hooks/          # Hooks customizados (CRUD, auth, etc.)
+ │   ├── pages/          # Páginas principais do app (Home, Login, etc.)
+ │   ├── App.js          # Componente raiz
+ │   └── index.js        # Entrada da aplicação
+ ├── package.json        # Dependências e scripts
+ └── README.md           # Documentação do projeto
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+▶️ Como Rodar o Projeto
 
-### Code Splitting
+Clone este repositório:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+git clone https://github.com/SEU_USUARIO/miniblog.git
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Instale as dependências:
 
-### Making a Progressive Web App
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+Configure o Firebase:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Crie um projeto no Firebase Console
 
-### Deployment
+Ative Authentication (Email/Password)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Ative Cloud Firestore
 
-### `npm run build` fails to minify
+Copie as credenciais do Firebase e cole em src/firebase/config.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Exemplo:
+
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_PROJETO.firebaseapp.com",
+  projectId: "SEU_PROJETO",
+  storageBucket: "SEU_PROJETO.appspot.com",
+  messagingSenderId: "SEU_ID",
+  appId: "SEU_APP_ID"
+};
+
+
+Rode o projeto:
+
+npm start
+
+
+O app estará disponível em:
+
+http://localhost:3000
