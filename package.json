@@ -2,7 +2,7 @@
   "name": "miniblog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://raphaelrosa74.miniblog/",
+  "homepage": "https://raphaelrosa74.github.io/miniblog",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
