@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 
 //hooks
@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="App">
       <AuthProvider value={{ user }}>
-        <BrowserRouter>
+        <HashRouter basename="/miniblog">
           <Navbar />
           <div className="container">
             <Routes>
@@ -75,7 +75,7 @@ function App() {
             </Routes>
           </div>
           <Footer />
-        </BrowserRouter>
+        </HashRouter>
       </AuthProvider>
     </div>
   );
